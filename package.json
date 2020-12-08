@@ -1,0 +1,29 @@
+{
+    "name": "civetkern",
+    "version": "0.0.41",
+    "description": "",
+    "scripts": {
+        "install": "prebuild-install || node-gyp rebuild",
+        "prebuild": "prebuild --all --strip",
+        "rebuild": "node-gyp rebuild --verbose",
+        "build": "node-gyp configure && node-gyp build",
+        "test": "node_modules/.bin/mocha test/function.test.js"
+    },
+    "main": "index.js",
+    "keywords": [
+        "nodejs",
+        "c++",
+        "civet",
+        "addon"
+    ],
+    "gypfile": true,
+    "author": "webberg",
+    "license": "MIT",
+    "dependencies": {
+        "node-addon-api": "^3.0.2"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^8.2.1"
+    }
+}
