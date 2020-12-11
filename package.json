@@ -3,6 +3,7 @@
     "version": "0.0.41",
     "description": "",
     "scripts": {
+        "install:halide": "node install/halide.js",
         "install": "prebuild-install || node-gyp rebuild",
         "prebuild": "prebuild --all --strip",
         "rebuild": "node-gyp rebuild --verbose",
@@ -24,6 +25,9 @@
     },
     "devDependencies": {
         "chai": "^4.2.0",
-        "mocha": "^8.2.1"
+        "mocha": "^8.2.1",
+        "npmlog": "^4.1.2",
+        "simple-get": "^4.0.0",
+        "tar-fs": "^2.1.1"
     }
 }
