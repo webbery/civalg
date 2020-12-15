@@ -164,36 +164,25 @@ request.then((res) => {
   if (!fs.existsSync('lib')) {
     fs.mkdirSync('lib')
   }
-  // const tmpFile = fs.createWriteStream(tarPathCache);
+  const tmpFile = fs.createWriteStream(tarPathCache);
   npmLog.info('civalg', 'Downloading ' + downloadTar);
   get(downloadTar, function(err, res) {
-    
+    if(err) {
+      console.error(err)
+      throw err
+    }
+    if (res.statusCode !== 200) {
+      npmLog.error('civalg', res.statusMessage)
+      return
+    }
+    res.pipe(tmpFile)
   })
-  // const buffer = await Get(downloadTar)
-  // let redirect = Buffer.concat(buffer).toString()
-  // const anchor = redirect.indexOf('href="')
-  // const end = redirect.indexOf('">redirected')
-  // const realAddr = redirect.substring(anchor + 'href="'.length, end)
-  // console.info(realAddr)
-  // const tar = await Get(realAddr)
-  // fs.writeFileSync(tarPathCache, tar)
-
-  // downloadRequest(downloadTar, tarPathCache)
-  // stream.pipeline(
-  //   fs.createReadStream(downloadTar),
-  //   tmpFile,
-  //   // new zlib.BrotliDecompress(),
-  //   // tarFs.extract('lib'),
-  //   function (err) {
-  //     if (err) {
-  //       if (/unexpected end of file/.test(err.message)) {
-  //         // npmLog.error('sharp', `Please delete ${tarPath} as it is not a valid tarball`);
-  //       }
-  //       console.error('stream err', err)
-  //       // fail(err);
-  //     }
-  //   }
-  // );
+  tmpFile
+    .on('error', function(){})
+    .on('close', function(){
+      npmLog.info('civalg', 'download halide finish')
+      // extract tar
+    })
 }).catch((err) => {
   console.error(err)
 })

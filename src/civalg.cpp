@@ -9,6 +9,7 @@ namespace civalg {
     Halide::Func gradient;
     Halide::Var x, y;
     Halide::Expr e = x + y;
+    Halide::Buffer<uint8_t> input = load_image("images/rgb.png");
     return info.Env().Undefined();
   }
 }

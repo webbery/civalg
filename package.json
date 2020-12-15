@@ -1,7 +1,7 @@
 {
-    "name": "civetkern",
-    "version": "0.0.41",
-    "description": "",
+    "name": "civalg",
+    "version": "0.0.1",
+    "description": "algorithm for civet",
     "scripts": {
         "install:halide": "node install/halide.js",
         "install": "prebuild-install || node-gyp rebuild",
