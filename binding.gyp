@@ -12,44 +12,26 @@
         # "<!(node -e \"require('nan')\")",
         '<!@(node -p "require(\'node-addon-api\').include")',
       ],
-      'conditions': [
-        ['OS == "win"', {
-          'type': 'shared_library',
-          'link_settings': {
-            'library_dirs': ['halide/lib/Release'],
-            'libraries': [
-              'Halide.lib'
-            ],
-          },
-          'configurations': {
-            'Release': {
-              'msvs_settings': {
-                'VCCLCompilerTool': {
-                  'ExceptionHandling': 1,
-                  'WholeProgramOptimization': 'true'
-                },
-                'VCLibrarianTool': {
-                  'AdditionalOptions': [
-                    '/LTCG:INCREMENTAL'
-                  ]
-                },
-                'VCLinkerTool': {
-                  'ImageHasSafeExceptionHandlers': 'false',
-                  'OptimizeReferences': 2,
-                  'EnableCOMDATFolding': 2,
-                  'LinkIncremental': 1,
-                  'AdditionalOptions': [
-                    '/LTCG:INCREMENTAL'
-                  ]
-                }
-              },
-              'msvs_disabled_warnings': [
-                4275
-              ]
-            }
-          }
-        }]
-      ]
+      "cflags!": [
+        '-fno-exceptions',
+        '-fno-rtti'
+      ],
+       "cflags_cc!": [
+        '-fno-exceptions',
+        '-fno-rtti'
+      ],
+      'xcode_settings': {
+        'CLANG_CXX_LANGUAGE_STANDARD': 'c++17',
+        'MACOSX_DEPLOYMENT_TARGET': '10.9',
+        'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+        'GCC_ENABLE_CPP_RTTI': 'YES',
+        'OTHER_CPLUSPLUSFLAGS': [
+          '-fexceptions',
+          '-Wall',
+          '-mmacosx-version-min=10.15',
+          '-O3'
+        ]
+      }
     }
   ]
 }
