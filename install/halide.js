@@ -182,6 +182,7 @@ request.then((res) => {
     .on('close', function(){
       npmLog.info('civalg', 'download halide finish')
       // extract tar
+      fs.createReadStream(tarPathCache).pipe(tarFs.extract('./Halide'))
     })
 }).catch((err) => {
   console.error(err)

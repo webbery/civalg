@@ -4,6 +4,7 @@
       "target_name": "civalg",
       "sources": [
         "src/civalg.cpp",
+        "src/Color.cpp",
         "src/util.cpp"
       ],
       "include_dirs": [
