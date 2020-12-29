@@ -23,4 +23,8 @@ namespace civalg{
     converter(x, y) = {H, S, V};
     converter.realize(width, height);
   }
+
+  void HSV2RGB(const Halide::Buffer<uint8_t>& input, int width, int height, int channel){
+    
+  }
 }
