@@ -1,4 +1,7 @@
 {
+  'variables': {
+    'halide_dir': '<(module_root_dir)/Halide'
+  },
   "targets": [
     {
       "target_name": "civalg",
@@ -31,8 +34,17 @@
           '-Wall',
           '-mmacosx-version-min=10.15',
           '-O3'
+        ],
+        "OTHER_LDFLAGS": [
+          '-Wl,-rpath,\'@loader_path/../../Halide/lib\''
         ]
-      }
+      },
+      'link_settings': {
+        'library_dirs': ['<(halide_dir)/lib'],
+          'libraries': [
+            'libHalide.dylib'
+          ],
+        },
     }
   ]
 }
