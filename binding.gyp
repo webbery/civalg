@@ -12,7 +12,7 @@
       ],
       "include_dirs": [
         "include",
-        "halide/include",
+        "Halide/include",
         # "<!(node -e \"require('nan')\")",
         '<!@(node -p "require(\'node-addon-api\').include")',
       ],
@@ -37,14 +37,26 @@
         ],
         "OTHER_LDFLAGS": [
           '-Wl,-rpath,\'@loader_path/../../Halide/lib\''
-        ]
-      },
-      'link_settings': {
-        'library_dirs': ['<(halide_dir)/lib'],
+        ],
+        'link_settings': {
+          'library_dirs': ['<(halide_dir)/lib'],
           'libraries': [
             'libHalide.dylib'
           ],
-        },
+        }
+      },
+      'conditions':[
+        ['OS == "win"', {}],
+        ['OS == "linux"', {
+          'link_settings': {
+            'library_dirs': ['<(halide_dir)/lib'],
+            'libraries': [
+            'libHalide.dylib'
+            ],
+          },
+        }]
+      ]
+      
     }
   ]
 }

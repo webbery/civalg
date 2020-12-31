@@ -4,7 +4,7 @@
     "description": "algorithm for civet",
     "scripts": {
         "install:halide": "node install/halide.js",
-        "install": "prebuild-install || node-gyp rebuild",
+        "install": "prebuild-install || node install/halide.js || node-gyp rebuild",
         "prebuild": "prebuild --all --strip",
         "rebuild": "node-gyp rebuild --verbose",
         "build": "node-gyp configure && node-gyp build",
