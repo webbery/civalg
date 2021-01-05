@@ -15,10 +15,11 @@ namespace civalg {
     int height = nHeight.Int32Value();
     Napi::Number nChannel = info[2].As<Napi::Number>();
     int channel = nChannel.Int32Value();
-    Napi::ArrayBuffer nBuffer = info[3].As<Napi::ArrayBuffer>();
-    std::cout<<"----\n";
-    Halide::Buffer<uint8_t> input;// = load_image("images/rgb.png");
-    RGB2HSV(input, 2,2);
+    Napi::Uint8Array nBuffer = info[3].As<Napi::Uint8Array>();
+    Halide::Buffer<uint8_t> input = Halide::Runtime::Buffer<uint8_t>::make_interleaved(
+      (uint8_t*)nBuffer.Data(), width, height, channel);
+    Halide::Buffer<uint8_t> output = RGB2HSV(input, width, height, channel);
+    std::cout<<output.width()<<", "<<output.height()<<std::endl;
     return info.Env().Undefined();
   }
 }

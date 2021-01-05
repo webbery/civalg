@@ -1,7 +1,7 @@
 #include "Color.h"
 
 namespace civalg{
-  void RGB2HSV(const Halide::Buffer<uint8_t>& input, int width, int height, int channel) {
+  Halide::Buffer<uint8_t> RGB2HSV(const Halide::Buffer<uint8_t>& input, int width, int height, int channel) {
     // Halide::Input<Halide::Buffer<uint8_t>> input{"input", 3};
     Halide::Func converter("convert");
     Halide::Var x("x"), y("y"), c("pixel");
@@ -9,6 +9,7 @@ namespace civalg{
     Halide::Expr G = input(x,y,1);
     Halide::Expr B = input(x,y,2);
     
+    std::cout<<"--1--\n";
     Halide::Expr maxValue=Halide::max(R,G);
     maxValue=Halide::max(maxValue,B);
     Halide::Expr minValue=Halide::min(R,G);
@@ -21,7 +22,9 @@ namespace civalg{
                    maxValue == B, 240+(R-G)/(maxValue-minValue)*60,
                    /* else */     0);
     converter(x, y) = {H, S, V};
-    converter.realize(width, height);
+    std::cout<<"----\n";
+    Halide::Buffer<uint8_t> output = converter.realize(width, height);
+    return std::move(output);
   }
 
   void HSV2RGB(const Halide::Buffer<uint8_t>& input, int width, int height, int channel){
