@@ -1,4 +1,6 @@
 #include "util.h"
+#include <string>
+#include <napi.h>
 
 namespace civalg {
 

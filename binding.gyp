@@ -1,6 +1,6 @@
 {
   'variables': {
-    'halide_dir': '<(module_root_dir)/Halide'
+    # 'halide_dir': '<(module_root_dir)/Halide'
   },
   "targets": [
     {
@@ -8,11 +8,12 @@
       "sources": [
         "src/civalg.cpp",
         "src/Color.cpp",
+        "src/Image.cpp",
         "src/util.cpp"
       ],
       "include_dirs": [
         "include",
-        "Halide/include",
+        "/home/ywb/.cache/node-gyp/14.15.4/include/node",
         # "<!(node -e \"require('nan')\")",
         '<!@(node -p "require(\'node-addon-api\').include")',
       ],
@@ -36,12 +37,12 @@
           '-O3'
         ],
         "OTHER_LDFLAGS": [
-          '-Wl,-rpath,\'@loader_path/../../Halide/lib\''
+          # '-Wl,-rpath,\'@loader_path/../../Halide/lib\''
         ],
         'link_settings': {
-          'library_dirs': ['<(halide_dir)/lib'],
+          # 'library_dirs': ['<(halide_dir)/lib'],
           'libraries': [
-            'libHalide.dylib'
+            'libvips.dylib'
           ],
         }
       },
@@ -49,11 +50,15 @@
         ['OS == "win"', {}],
         ['OS == "linux"', {
           'link_settings': {
-            'library_dirs': ['<(halide_dir)/lib'],
+            'library_dirs': ['/usr/lib/x86_64-linux-gnu'],
             'libraries': [
-            'libHalide.dylib'
+              '/usr/lib/x86_64-linux-gnu/libvips.so'
             ],
           },
+          'include_dirs': [
+            "/usr/include/glib-2.0",
+            "/usr/lib/x86_64-linux-gnu/glib-2.0/include"
+          ]
         }]
       ]
       
